@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import PokeContainer from "./PokeContainer";
 
-function MainContainer() {
+type Props = {
+  pokemonImageRight: string;
+  pokemonImageLeft: string;
+};
+
+function MainContainer({ pokemonImageRight, pokemonImageLeft }: Props) {
   const StyledContainerWrapper = styled.div`
     display: flex;
     height: 50%;
@@ -39,9 +44,10 @@ function MainContainer() {
     <StyledContainerWrapper>
       <StyledContainer>
         <StyledContainerImage>
-          <PokeContainer />
-          <img src="Pokeball.svg" width={140} />
-          <PokeContainer />
+          <PokeContainer
+            pokemonImageRight={pokemonImageRight}
+            pokemonImageLeft={pokemonImageLeft}
+          />
         </StyledContainerImage>
       </StyledContainer>
     </StyledContainerWrapper>

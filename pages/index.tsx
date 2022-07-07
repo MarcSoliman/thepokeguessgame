@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import styled from "styled-components";
 import MainContainer from "../components/MainContainer";
+import PokeGuessApp from "../components/PokeGuessApp";
 import TitleBar from "../components/TitleBar";
 import styles from "../styles/Home.module.css";
 
@@ -19,7 +20,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <TitleBar />
-      <MainContainer />
+      <PokeGuessApp />
     </StyledContainer>
   );
 };
