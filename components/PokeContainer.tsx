@@ -27,9 +27,7 @@ export const StyledPokemonImage = styled.img`
   padding: 30px;
   height: 120%;
   width: 120%;
-  [src=""] {
-    display: none;
-  }
+
   image-rendering: optimizeSpeed; /* STOP SMOOTHING, GIVE ME SPEED  */
   image-rendering: -moz-crisp-edges; /* Firefox                        */
   image-rendering: -o-crisp-edges; /* Opera                          */
@@ -38,18 +36,25 @@ export const StyledPokemonImage = styled.img`
   image-rendering: optimize-contrast; /* CSS3 Proposed                  */
   -ms-interpolation-mode: nearest-neighbor; /* IE8+                           */
 
-  animation-timing-function: cubic-bezier(0.075, 1, 0.01, 1);
+  animation-timing-function: cubic-bezier(0, 0.75, 1.5, 0.1);
   &.load-anim {
-    animation-duration: 3s;
-    animation-name: loadin;
+    animation: loadin 1s;
   }
 
   @keyframes loadin {
-    from {
-      width: 20%;
-      height: 20%;
+    0% {
+      width: 0%;
+      height: 50%;
     }
-    to {
+    85% {
+      width: 140%;
+      height: 140%;
+    }
+    90% {
+      width: 100%;
+      height: 100%;
+    }
+    100% {
       width: 120%;
       height: 120%;
     }
