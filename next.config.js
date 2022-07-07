@@ -3,4 +3,11 @@ const nextConfig = {
   reactStrictMode: false,
 };
 
-module.exports = nextConfig;
+// module.exports = nextConfig;
+// next.config.js
+module.exports = {
+  experimental: {
+    // Enables the styled-components SWC transform
+    styledComponents: true,
+  },
+};

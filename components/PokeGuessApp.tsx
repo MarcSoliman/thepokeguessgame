@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
 import MainContainer from "./MainContainer";
 import Question from "./Question";
-import axios from "axios";
 
 type Props = {
   pokemonLImage: string;

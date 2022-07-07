@@ -1,17 +1,23 @@
-import type { GetServerSideProps, NextPage } from "next";
+import type { NextPage } from "next";
+
 import Head from "next/head";
 import Image from "next/image";
 import PokeGuessApp from "../components/PokeGuessApp";
 import TitleBar from "../components/TitleBar";
-import { StyledBackgroundContainer } from "../././components/styles.js";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+export const StyledBackgroundContainer = styled.div`
+  background-image: url("Background.png");
+  height: 100vh;
+`;
 
 const Home: NextPage = () => {
   const [pokemonRImage, setPokemonRImage] = useState("");
   const [pokemonLImage, setPokemonLImage] = useState(" ");
-
-  const GeneratedQuestion: string = "Is Heavier?";
+  const [pokemonQuestion, setPokemonQuestion] = useState("Is Heavier?");
 
   const randomPokemon: (inUseID?: number) => number = (inUseID) => {
     const pokemonID = Math.floor(Math.random() * 800 + 1);
@@ -28,8 +34,7 @@ const Home: NextPage = () => {
   };
 
   const [pokemonRight, pokemonLeft] = generatePokemon();
-  console.log(pokemonRight);
-  console.log(pokemonLeft);
+
   const pokeImages = () => {
     axios.get("/api/pokeapi/" + JSON.stringify(pokemonRight)).then((result) => {
       setPokemonRImage(result.data.sprite);
@@ -38,7 +43,7 @@ const Home: NextPage = () => {
       setPokemonLImage(result.data.sprite);
     });
   };
-  useEffect(() => {}, []);
+
   useEffect(() => {
     pokeImages();
   }, []);
@@ -53,16 +58,10 @@ const Home: NextPage = () => {
       <PokeGuessApp
         pokemonRImage={pokemonRImage}
         pokemonLImage={pokemonLImage}
-        GeneratedQuestion={GeneratedQuestion}
+        GeneratedQuestion={pokemonQuestion}
       />
     </StyledBackgroundContainer>
   );
 };
 
 export default Home;
-
-export async function getServerSideProps(context: GetServerSideProps) {
-  return {
-    props: {}, // will be passed to the page component as props
-  };
-}
