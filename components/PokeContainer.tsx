@@ -1,5 +1,9 @@
-import { type } from "os";
-import styled from "styled-components";
+import { getDisplayName } from "next/dist/shared/lib/utils.js";
+import { useEffect, useRef } from "react";
+import { StyledPokeContainer } from "./styles.js";
+import { StyledPokemonImage } from "./styles.js";
+import { StyledPokeball } from "./styles.js";
+import { StyledWrapper } from "./styles.js";
 
 type Props = {
   pokemonImageRight: string;
@@ -7,42 +11,16 @@ type Props = {
 };
 
 function PokeContainer({ pokemonImageRight, pokemonImageLeft }: Props) {
-  const StyledWrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-  `;
+  const imgRef = useRef<HTMLImageElement>(null);
 
-  const StyledPokeContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 250px;
-    height: 250px;
-    z-index: 5;
-    background-color: #fff;
-    border-radius: 28px;
-    margin: 20px;
-  `;
-
-  const StyledPokeball = styled.img`
-    display: flex;
-  `;
-  const StyledPokemonImage = styled.img`
-    padding: 20px;
-    height: 100%;
-    width: 100%;
-  `;
   return (
     <StyledWrapper>
       <StyledPokeContainer>
-        <img src={pokemonImageRight} />
+        <StyledPokemonImage ref={imgRef} src={pokemonImageRight} alt=" " />
       </StyledPokeContainer>
       <StyledPokeball src="Pokeball.svg" width={140} />
       <StyledPokeContainer>
-        <img src={pokemonImageLeft} />
+        <StyledPokemonImage ref={imgRef} src={pokemonImageLeft} alt=" " />
       </StyledPokeContainer>
     </StyledWrapper>
   );

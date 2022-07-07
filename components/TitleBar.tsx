@@ -1,34 +1,9 @@
 import React from "react";
-import styled from "styled-components";
+import { StyledTitleWrapper } from "./styles.js";
+import { StyledTitleBar } from "./styles.js";
+import { StyledTitle } from "./styles.js";
 
 function TitleBar() {
-  const StyledTitleWrapper = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `;
-
-  const StyledTitleBar = styled.div`
-    width: 900px;
-    height: 140px;
-    background: linear-gradient(
-      180.76deg,
-      rgba(251, 189, 70, 0) -5.2%,
-      #fbbd46 47.51%,
-      #fcc63d 99.34%
-    );
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0 0 61px 61px;
-    box-shadow: 0px 33px 20px -23px rgba(163, 80, 4, 0.25); ;
-  `;
-
-  const StyledTitle = styled.h1`
-    font-size: 64px;
-    color: #fff;
-  `;
-
   return (
     <>
       <StyledTitleWrapper>

@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainContainer from "./MainContainer";
 import Question from "./Question";
+import axios from "axios";
 
-function PokeGuessApp() {
-  const GeneratedQuestion: string = "Is Heavier?";
+type Props = {
+  pokemonLImage: string;
+  pokemonRImage: string;
+  GeneratedQuestion: string;
+};
 
+function PokeGuessApp({
+  pokemonLImage,
+  pokemonRImage,
+  GeneratedQuestion,
+}: Props) {
   return (
     <div>
       <MainContainer
-        pokemonImageLeft="http://localhost:3000/Pokeball.svg"
-        pokemonImageRight="http://localhost:3000/Pokeball.svg"
+        pokemonImageLeft={pokemonLImage}
+        pokemonImageRight={pokemonRImage}
       />
       <Question GeneratedQuestion={GeneratedQuestion} />
     </div>
