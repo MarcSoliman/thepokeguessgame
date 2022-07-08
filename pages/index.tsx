@@ -15,8 +15,8 @@ export const StyledBackgroundContainer = styled.div`
 `;
 
 const Home: NextPage = () => {
-  const [pokemonRImage, setPokemonRImage] = useState("");
-  const [pokemonLImage, setPokemonLImage] = useState(" ");
+  const [pokemonRData, setPokemonRData]: any = useState("");
+  const [pokemonLData, setPokemonLData]: any = useState(" ");
   const [pokemonQuestion, setPokemonQuestion] = useState("Is Heavier?");
 
   const randomPokemon: (inUseID?: number) => number = (inUseID) => {
@@ -35,18 +35,19 @@ const Home: NextPage = () => {
 
   const [pokemonRight, pokemonLeft] = generatePokemon();
 
-  const pokeImages = () => {
+  const pokeDataFetch = () => {
     axios.get("/api/pokeapi/" + JSON.stringify(pokemonRight)).then((result) => {
-      setPokemonRImage(result.data.sprite);
+      setPokemonRData(result.data);
     });
     axios.get("/api/pokeapi/" + JSON.stringify(pokemonLeft)).then((result) => {
-      setPokemonLImage(result.data.sprite);
+      setPokemonLData(result.data);
     });
   };
 
   useEffect(() => {
-    pokeImages();
+    pokeDataFetch();
   }, []);
+
   return (
     <StyledBackgroundContainer>
       <Head>
@@ -56,9 +57,9 @@ const Home: NextPage = () => {
       </Head>
       <TitleBar />
       <PokeGuessApp
-        pokemonRImage={pokemonRImage}
-        pokemonLImage={pokemonLImage}
-        GeneratedQuestion={pokemonQuestion}
+        pokemonRImage={pokemonRData.sprite}
+        pokemonLImage={pokemonLData.sprite}
+        GeneratedQuestion={"test"}
       />
     </StyledBackgroundContainer>
   );

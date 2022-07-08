@@ -69,7 +69,7 @@ type Props = {
 let loadAnim = "load-anim";
 function PokeContainer({ pokemonImageRight, pokemonImageLeft }: Props) {
   const hideImg = () => {
-    if (pokemonImageRight === "" || pokemonImageLeft === " ") {
+    if (pokemonImageRight == undefined || pokemonImageLeft == undefined) {
       loadAnim = "";
       return true;
     } else {
