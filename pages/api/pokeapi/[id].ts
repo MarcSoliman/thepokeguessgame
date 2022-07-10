@@ -6,7 +6,7 @@ const baseUrl = process.env.POKE_API + "-species/"!;
 interface RelevantPokemonData {
   sprite: string;
   name: string;
-  abilities: object;
+  abilities: string;
   type: string;
   weight: string;
   height: string;
@@ -26,7 +26,7 @@ export default async function Id(req: NextApiRequest, res: NextApiResponse) {
   const relevantData: RelevantPokemonData = {
     sprite: data.sprites.front_default,
     name: data.name,
-    abilities: data.abilities,
+    abilities: data.abilities[0].ability.name,
     type: data.types[0].type.name,
     weight: data.weight,
     height: data.height,

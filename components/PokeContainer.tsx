@@ -82,7 +82,7 @@ function PokeContainer({ pokemonImageRight, pokemonImageLeft }: Props) {
     <StyledWrapper>
       <StyledPokeContainer>
         <StyledPokemonImage
-          src={pokemonImageRight}
+          src={pokemonImageLeft}
           alt=" "
           hidden={hideImg()}
           className={loadAnim}
@@ -91,7 +91,7 @@ function PokeContainer({ pokemonImageRight, pokemonImageLeft }: Props) {
       <StyledPokeball src="Pokeball.svg" width={140} />
       <StyledPokeContainer>
         <StyledPokemonImage
-          src={pokemonImageLeft}
+          src={pokemonImageRight}
           alt=" "
           hidden={hideImg()}
           className={loadAnim}

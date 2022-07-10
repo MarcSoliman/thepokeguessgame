@@ -16,8 +16,8 @@ export const StyledBackgroundContainer = styled.div`
 
 const Home: NextPage = () => {
   const [pokemonRData, setPokemonRData]: any = useState("");
-  const [pokemonLData, setPokemonLData]: any = useState(" ");
-  const [pokemonQuestion, setPokemonQuestion] = useState("Is Heavier?");
+  const [pokemonLData, setPokemonLData]: any = useState("");
+  const [pokemonQuestion, setPokemonQuestion]: any = useState("");
 
   const randomPokemon: (inUseID?: number) => number = (inUseID) => {
     const pokemonID = Math.floor(Math.random() * 800 + 1);
@@ -35,6 +35,38 @@ const Home: NextPage = () => {
 
   const [pokemonRight, pokemonLeft] = generatePokemon();
 
+  const chosenQuestion = () => {
+    const chosenPokemon = [pokemonRData, pokemonLData][
+      Math.floor(Math.random() * 2)
+    ];
+    const typeOfQuestion = Math.random() * 1;
+
+    if (typeOfQuestion > 0.7) {
+      if (pokemonRData?.legendaryStatus !== pokemonLData?.legendaryStatus) {
+        setPokemonQuestion("is a Legendary pokemon?");
+      } else if (pokemonRData?.abilities !== pokemonLData?.abilities) {
+        setPokemonQuestion(
+          "has the ability '" + chosenPokemon?.abilities + "' ?"
+        );
+      } else if (pokemonRData?.name !== pokemonLData?.name) {
+        setPokemonQuestion("has the name '" + chosenPokemon?.name + "' ?");
+      }
+    } else if (typeOfQuestion > 0.5 && typeOfQuestion < 0.7) {
+      if (pokemonRData?.weight !== pokemonLData?.weight) {
+        setPokemonQuestion("is heavier ?");
+      }
+    } else if (typeOfQuestion > 0.25 && typeOfQuestion < 0.5) {
+      if (pokemonRData?.height !== pokemonLData?.height) {
+        setPokemonQuestion("is taller ?");
+      }
+    } else if (typeOfQuestion >= 0 && typeOfQuestion < 0.25) {
+      if (pokemonRData?.name !== pokemonLData?.name) {
+        setPokemonQuestion("has the name '" + chosenPokemon?.name + "' ?");
+      }
+    }
+
+    console.log(pokemonQuestion);
+  };
   const pokeDataFetch = () => {
     axios.get("/api/pokeapi/" + JSON.stringify(pokemonRight)).then((result) => {
       setPokemonRData(result.data);
@@ -47,6 +79,9 @@ const Home: NextPage = () => {
   useEffect(() => {
     pokeDataFetch();
   }, []);
+  useEffect(() => {
+    chosenQuestion();
+  }, [pokemonRData, pokemonLData]);
 
   return (
     <StyledBackgroundContainer>
@@ -59,7 +94,7 @@ const Home: NextPage = () => {
       <PokeGuessApp
         pokemonRImage={pokemonRData.sprite}
         pokemonLImage={pokemonLData.sprite}
-        GeneratedQuestion={"test"}
+        GeneratedQuestion={pokemonQuestion}
       />
     </StyledBackgroundContainer>
   );
