@@ -14,11 +14,20 @@ export const StyledBackgroundContainer = styled.div`
   height: 100vh;
 `;
 
+export const StyledScore = styled.h1`
+  position: fixed;
+  left: 20px;
+  top: 400px;
+  color: #fff;
+`;
+
 const Home: NextPage = () => {
   const [pokemonRData, setPokemonRData]: any = useState("");
   const [pokemonLData, setPokemonLData]: any = useState("");
   const [pokemonQuestion, setPokemonQuestion]: any = useState("");
   const [selectedPokemon, setSelectedPokemon]: any = useState("");
+  const [randImgKey, setRandImgKey]: any = useState(0);
+  const [score, setScore]: any = useState(0);
 
   const randomPokemon: (inUseID?: number) => number = (inUseID) => {
     const pokemonID = Math.floor(Math.random() * 800 + 1);
@@ -101,6 +110,7 @@ const Home: NextPage = () => {
         setPokemonRData(pokeRightResponse.data);
         setPokemonLData(pokeLeftResponse.data);
         chosenQuestion(pokeRightResponse.data, pokeLeftResponse.data);
+        setRandImgKey(Math.random() * 999);
       })
     );
   };
@@ -111,6 +121,7 @@ const Home: NextPage = () => {
 
   const winLoseCallback: any = (state: string) => {
     if (state === "win") {
+      setScore(score + 1);
       pokeDataFetch();
     } else {
       console.log("YOU LOSE");
@@ -132,7 +143,9 @@ const Home: NextPage = () => {
         GeneratedQuestion={pokemonQuestion}
         selectedPokemon={selectedPokemon}
         winLose={winLoseCallback}
-      />
+        randImgKey={randImgKey}
+      />{" "}
+      <StyledScore>SCORE: {score}</StyledScore>
     </StyledBackgroundContainer>
   );
 };

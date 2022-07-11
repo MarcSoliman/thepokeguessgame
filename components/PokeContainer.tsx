@@ -47,7 +47,7 @@ export const StyledPokemonImage = styled.img`
     width: 120%;
     height: 120%;
   }
-  animation-timing-function: cubic-bezier(2, 0, 1, 0);
+  animation-timing-function: cubic-bezier(1, 1, 1, 0.75);
 
   &.load-anim {
     animation: loadin 2s;
@@ -80,6 +80,7 @@ type Props = {
   pokemonRName: string;
   pokemonLName: string;
   winLose: any;
+  randImgKey: any;
 };
 
 let loadAnim = "load-anim ";
@@ -92,6 +93,7 @@ function PokeContainer({
   pokemonRName,
   pokemonLName,
   winLose,
+  randImgKey,
 }: Props) {
   const hideImg = () => {
     if (pokemonImageRight == undefined || pokemonImageLeft == undefined) {
@@ -109,7 +111,6 @@ function PokeContainer({
       winLose("lose");
     } else {
       winLose("win");
-      randImgKey = Math.random() * 200;
     }
   };
   return (

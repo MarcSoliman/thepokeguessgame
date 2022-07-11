@@ -9,6 +9,7 @@ type Props = {
   pokemonRName: string;
   pokemonLName: string;
   winLose: any;
+  randImgKey: any;
 };
 
 function PokeGuessApp({
@@ -19,6 +20,7 @@ function PokeGuessApp({
   pokemonRName,
   pokemonLName,
   winLose,
+  randImgKey,
 }: Props) {
   return (
     <div>
@@ -29,6 +31,7 @@ function PokeGuessApp({
         pokemonRName={pokemonRName}
         pokemonLName={pokemonLName}
         winLose={winLose}
+        randImgKey={randImgKey}
       />
       <Question GeneratedQuestion={GeneratedQuestion} />
     </div>
