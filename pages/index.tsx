@@ -28,6 +28,7 @@ const Home: NextPage = () => {
   const [selectedPokemon, setSelectedPokemon]: any = useState("");
   const [randImgKey, setRandImgKey]: any = useState(0);
   const [score, setScore]: any = useState(0);
+  const [didLose, setDidLose]: any = useState(false);
 
   const randomPokemon: (inUseID?: number) => number = (inUseID) => {
     const pokemonID = Math.floor(Math.random() * 800 + 1);
@@ -125,6 +126,7 @@ const Home: NextPage = () => {
       pokeDataFetch();
     } else {
       console.log("YOU LOSE");
+      setDidLose(true);
     }
   };
   return (
@@ -143,8 +145,9 @@ const Home: NextPage = () => {
         GeneratedQuestion={pokemonQuestion}
         selectedPokemon={selectedPokemon}
         winLose={winLoseCallback}
+        didLose={didLose}
         randImgKey={randImgKey}
-      />{" "}
+      />
       <StyledScore>SCORE: {score}</StyledScore>
     </StyledBackgroundContainer>
   );
