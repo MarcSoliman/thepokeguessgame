@@ -36,73 +36,78 @@ const Home: NextPage = () => {
 
   const [pokemonRight, pokemonLeft] = generatePokemon();
 
-  const chosenQuestion = () => {
-    let chosenPokemon = [pokemonRData, pokemonLData][
-      Math.floor(Math.random() * 2)
-    ];
+  const chosenQuestion = (pokemonR: any, pokemonL: any) => {
+    let chosenPokemon = [pokemonR, pokemonL][Math.floor(Math.random() * 2)];
     setSelectedPokemon(chosenPokemon);
     const typeOfQuestion = Math.random() * 1;
 
     if (typeOfQuestion > 0.7) {
-      if (pokemonRData?.legendaryStatus !== pokemonLData?.legendaryStatus) {
-        if (pokemonRData?.legendaryStatus === true) {
-          chosenPokemon = pokemonRData;
+      if (pokemonR?.legendaryStatus !== pokemonL?.legendaryStatus) {
+        if (pokemonR?.legendaryStatus === true) {
+          chosenPokemon = pokemonR;
           setSelectedPokemon(chosenPokemon);
         } else {
-          chosenPokemon = pokemonLData;
+          chosenPokemon = pokemonL;
           setSelectedPokemon(chosenPokemon);
         }
         setPokemonQuestion("is a Legendary pokemon?");
-      } else if (pokemonRData?.abilities !== pokemonLData?.abilities) {
+      } else if (pokemonR?.abilities !== pokemonL?.abilities) {
         setPokemonQuestion(
           "has the ability '" + chosenPokemon?.abilities + "' ?"
         );
-      } else if (pokemonRData?.name !== pokemonLData?.name) {
+      } else if (pokemonR?.name !== pokemonL?.name) {
         setPokemonQuestion("has the name '" + chosenPokemon?.name + "' ?");
       }
     } else if (typeOfQuestion > 0.5 && typeOfQuestion < 0.7) {
-      if (pokemonRData?.weight !== pokemonLData?.weight) {
-        if (pokemonRData?.weight > pokemonLData?.weight) {
-          chosenPokemon = pokemonRData;
+      if (pokemonR?.weight !== pokemonL?.weight) {
+        if (pokemonR?.weight > pokemonL?.weight) {
+          chosenPokemon = pokemonR;
           setSelectedPokemon(chosenPokemon);
         } else {
-          chosenPokemon = pokemonLData;
+          chosenPokemon = pokemonL;
           setSelectedPokemon(chosenPokemon);
         }
         setPokemonQuestion("is heavier ?");
       }
     } else if (typeOfQuestion > 0.25 && typeOfQuestion < 0.5) {
-      if (pokemonRData?.height !== pokemonLData?.height) {
-        if (pokemonRData?.height > pokemonLData?.height) {
-          chosenPokemon = pokemonRData;
+      if (pokemonR?.height !== pokemonL?.height) {
+        if (pokemonR?.height > pokemonL?.height) {
+          chosenPokemon = pokemonR;
           setSelectedPokemon(chosenPokemon);
         } else {
-          chosenPokemon = pokemonLData;
+          chosenPokemon = pokemonL;
           setSelectedPokemon(chosenPokemon);
         }
         setPokemonQuestion("is taller ?");
       }
     } else if (typeOfQuestion >= 0 && typeOfQuestion < 0.25) {
-      if (pokemonRData?.name !== pokemonLData?.name) {
+      if (pokemonR?.name !== pokemonL?.name) {
         setPokemonQuestion("has the name '" + chosenPokemon?.name + "' ?");
       }
     }
   };
   const pokeDataFetch = () => {
-    axios.get("/api/pokeapi/" + JSON.stringify(pokemonRight)).then((result) => {
-      setPokemonRData(result.data);
-    });
-    axios.get("/api/pokeapi/" + JSON.stringify(pokemonLeft)).then((result) => {
-      setPokemonLData(result.data);
-    });
+    const pokeRightRequest = axios.get(
+      "/api/pokeapi/" + JSON.stringify(pokemonRight)
+    );
+    const pokeLeftRequest = axios.get(
+      "/api/pokeapi/" + JSON.stringify(pokemonLeft)
+    );
+    axios.all([pokeRightRequest, pokeLeftRequest]).then(
+      axios.spread((...responses) => {
+        const pokeRightResponse = responses[0];
+        const pokeLeftResponse = responses[1];
+
+        setPokemonRData(pokeRightResponse.data);
+        setPokemonLData(pokeLeftResponse.data);
+        chosenQuestion(pokeRightResponse.data, pokeLeftResponse.data);
+      })
+    );
   };
 
   useEffect(() => {
     pokeDataFetch();
   }, []);
-  useEffect(() => {
-    chosenQuestion();
-  }, [pokemonRData, pokemonLData]);
 
   const winLoseCallback: any = (state: string) => {
     if (state === "win") {
