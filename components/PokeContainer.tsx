@@ -43,9 +43,14 @@ export const StyledPokemonImage = styled.img`
     height: 140%;
   }
 
-  animation-timing-function: cubic-bezier(0, 0.75, 1.5, 0.1);
+  :active {
+    width: 120%;
+    height: 120%;
+  }
+  animation-timing-function: cubic-bezier(2, 0, 1, 0);
+
   &.load-anim {
-    animation: loadin 1s;
+    animation: loadin 2s;
   }
 
   @keyframes loadin {
@@ -77,7 +82,8 @@ type Props = {
   winLose: any;
 };
 
-let loadAnim = "load-anim";
+let loadAnim = "load-anim ";
+let randImgKey: number;
 
 function PokeContainer({
   pokemonImageRight,
@@ -93,6 +99,7 @@ function PokeContainer({
       return true;
     } else {
       loadAnim = "load-anim ";
+
       return false;
     }
   };
@@ -101,14 +108,15 @@ function PokeContainer({
     if (pokemon !== selectedPokemon.name) {
       winLose("lose");
     } else {
-      setTimeout(winLose, 1000, "win");
+      winLose("win");
+      randImgKey = Math.random() * 200;
     }
   };
-
   return (
     <StyledWrapper>
       <StyledPokeContainer>
         <StyledPokemonImage
+          key={randImgKey}
           src={pokemonImageLeft}
           alt=" "
           hidden={hideImg()}
@@ -119,6 +127,7 @@ function PokeContainer({
       <StyledPokeball src="Pokeball.svg" width={140} />
       <StyledPokeContainer>
         <StyledPokemonImage
+          key={randImgKey}
           src={pokemonImageRight}
           alt=" "
           hidden={hideImg()}

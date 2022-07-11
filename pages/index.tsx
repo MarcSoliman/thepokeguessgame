@@ -37,7 +37,7 @@ const Home: NextPage = () => {
   const [pokemonRight, pokemonLeft] = generatePokemon();
 
   const chosenQuestion = () => {
-    const chosenPokemon = [pokemonRData, pokemonLData][
+    let chosenPokemon = [pokemonRData, pokemonLData][
       Math.floor(Math.random() * 2)
     ];
     setSelectedPokemon(chosenPokemon);
@@ -45,6 +45,13 @@ const Home: NextPage = () => {
 
     if (typeOfQuestion > 0.7) {
       if (pokemonRData?.legendaryStatus !== pokemonLData?.legendaryStatus) {
+        if (pokemonRData?.legendaryStatus === true) {
+          chosenPokemon = pokemonRData;
+          setSelectedPokemon(chosenPokemon);
+        } else {
+          chosenPokemon = pokemonLData;
+          setSelectedPokemon(chosenPokemon);
+        }
         setPokemonQuestion("is a Legendary pokemon?");
       } else if (pokemonRData?.abilities !== pokemonLData?.abilities) {
         setPokemonQuestion(
@@ -55,10 +62,24 @@ const Home: NextPage = () => {
       }
     } else if (typeOfQuestion > 0.5 && typeOfQuestion < 0.7) {
       if (pokemonRData?.weight !== pokemonLData?.weight) {
+        if (pokemonRData?.weight > pokemonLData?.weight) {
+          chosenPokemon = pokemonRData;
+          setSelectedPokemon(chosenPokemon);
+        } else {
+          chosenPokemon = pokemonLData;
+          setSelectedPokemon(chosenPokemon);
+        }
         setPokemonQuestion("is heavier ?");
       }
     } else if (typeOfQuestion > 0.25 && typeOfQuestion < 0.5) {
       if (pokemonRData?.height !== pokemonLData?.height) {
+        if (pokemonRData?.height > pokemonLData?.height) {
+          chosenPokemon = pokemonRData;
+          setSelectedPokemon(chosenPokemon);
+        } else {
+          chosenPokemon = pokemonLData;
+          setSelectedPokemon(chosenPokemon);
+        }
         setPokemonQuestion("is taller ?");
       }
     } else if (typeOfQuestion >= 0 && typeOfQuestion < 0.25) {
@@ -66,8 +87,6 @@ const Home: NextPage = () => {
         setPokemonQuestion("has the name '" + chosenPokemon?.name + "' ?");
       }
     }
-
-    console.log(pokemonQuestion);
   };
   const pokeDataFetch = () => {
     axios.get("/api/pokeapi/" + JSON.stringify(pokemonRight)).then((result) => {
