@@ -18,6 +18,10 @@ export const StyledPokeContainer = styled.div`
   background-color: #fff;
   border-radius: 28px;
   margin: 20px;
+
+  &.didLose {
+    background-color: #f88383;
+  }
 `;
 
 export const StyledPokeball = styled.img`
@@ -71,6 +75,11 @@ export const StyledPokemonImage = styled.img`
       height: 120%;
     }
   }
+
+  &.didLose {
+    width: 0;
+    height: 0;
+  }
 `;
 
 type Props = {
@@ -81,6 +90,7 @@ type Props = {
   pokemonLName: string;
   winLose: any;
   randImgKey: any;
+  didLose: any;
 };
 
 let loadAnim = "load-anim ";
@@ -94,6 +104,7 @@ function PokeContainer({
   pokemonLName,
   winLose,
   randImgKey,
+  didLose,
 }: Props) {
   const hideImg = () => {
     if (pokemonImageRight == undefined || pokemonImageLeft == undefined) {
@@ -106,6 +117,14 @@ function PokeContainer({
     }
   };
 
+  const loseState = () => {
+    if (didLose === true) {
+      return " didLose";
+    } else {
+      return "";
+    }
+  };
+
   const reviewAnswer = (pokemon: string) => {
     if (pokemon !== selectedPokemon.name) {
       winLose("lose");
@@ -115,24 +134,24 @@ function PokeContainer({
   };
   return (
     <StyledWrapper>
-      <StyledPokeContainer>
+      <StyledPokeContainer className={loseState()}>
         <StyledPokemonImage
           key={randImgKey}
           src={pokemonImageLeft}
           alt=" "
           hidden={hideImg()}
-          className={loadAnim}
+          className={loadAnim + loseState()}
           onClick={() => reviewAnswer(pokemonLName)}
         />
       </StyledPokeContainer>
       <StyledPokeball src="Pokeball.svg" width={140} />
-      <StyledPokeContainer>
+      <StyledPokeContainer className={loseState()}>
         <StyledPokemonImage
           key={randImgKey}
           src={pokemonImageRight}
           alt=" "
           hidden={hideImg()}
-          className={loadAnim}
+          className={loadAnim + loseState()}
           onClick={() => reviewAnswer(pokemonRName)}
         />
       </StyledPokeContainer>

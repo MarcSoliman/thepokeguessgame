@@ -43,6 +43,7 @@ type Props = {
   pokemonLName: string;
   winLose: any;
   randImgKey: any;
+  didLose: any;
 };
 
 function MainContainer({
@@ -53,6 +54,7 @@ function MainContainer({
   pokemonLName,
   winLose,
   randImgKey,
+  didLose,
 }: Props) {
   return (
     <StyledContainerWrapper>
@@ -66,6 +68,7 @@ function MainContainer({
             pokemonRName={pokemonRName}
             winLose={winLose}
             randImgKey={randImgKey}
+            didLose={didLose}
           />
         </StyledContainerImage>
       </StyledContainer>

@@ -1,5 +1,6 @@
 import MainContainer from "./MainContainer";
 import Question from "./Question";
+import LoseScreen from "./LoseScreen";
 
 type Props = {
   pokemonLImage: string;
@@ -10,6 +11,7 @@ type Props = {
   pokemonLName: string;
   winLose: any;
   randImgKey: any;
+  didLose: any;
 };
 
 function PokeGuessApp({
@@ -21,6 +23,7 @@ function PokeGuessApp({
   pokemonLName,
   winLose,
   randImgKey,
+  didLose,
 }: Props) {
   return (
     <div>
@@ -32,8 +35,15 @@ function PokeGuessApp({
         pokemonLName={pokemonLName}
         winLose={winLose}
         randImgKey={randImgKey}
+        didLose={didLose}
       />
-      <Question GeneratedQuestion={GeneratedQuestion} />
+      <div>
+        {didLose ? (
+          <LoseScreen />
+        ) : (
+          <Question GeneratedQuestion={GeneratedQuestion} />
+        )}
+      </div>
     </div>
   );
 }
