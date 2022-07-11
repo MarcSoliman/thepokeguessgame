@@ -35,6 +35,13 @@ export const StyledPokemonImage = styled.img`
   image-rendering: pixelated; /* Chrome */
   image-rendering: optimize-contrast; /* CSS3 Proposed                  */
   -ms-interpolation-mode: nearest-neighbor; /* IE8+                           */
+  transition: all 0.3s ease-out;
+  :hover {
+    cursor: pointer;
+
+    width: 140%;
+    height: 140%;
+  }
 
   animation-timing-function: cubic-bezier(0, 0.75, 1.5, 0.1);
   &.load-anim {
@@ -64,17 +71,37 @@ export const StyledPokemonImage = styled.img`
 type Props = {
   pokemonImageRight: string;
   pokemonImageLeft: string;
+  selectedPokemon: any;
+  pokemonRName: string;
+  pokemonLName: string;
+  winLose: any;
 };
 
 let loadAnim = "load-anim";
-function PokeContainer({ pokemonImageRight, pokemonImageLeft }: Props) {
+
+function PokeContainer({
+  pokemonImageRight,
+  pokemonImageLeft,
+  selectedPokemon,
+  pokemonRName,
+  pokemonLName,
+  winLose,
+}: Props) {
   const hideImg = () => {
     if (pokemonImageRight == undefined || pokemonImageLeft == undefined) {
       loadAnim = "";
       return true;
     } else {
-      loadAnim = "load-anim";
+      loadAnim = "load-anim ";
       return false;
+    }
+  };
+
+  const reviewAnswer = (pokemon: string) => {
+    if (pokemon !== selectedPokemon.name) {
+      winLose("lose");
+    } else {
+      setTimeout(winLose, 1000, "win");
     }
   };
 
@@ -86,6 +113,7 @@ function PokeContainer({ pokemonImageRight, pokemonImageLeft }: Props) {
           alt=" "
           hidden={hideImg()}
           className={loadAnim}
+          onClick={() => reviewAnswer(pokemonLName)}
         />
       </StyledPokeContainer>
       <StyledPokeball src="Pokeball.svg" width={140} />
@@ -95,6 +123,7 @@ function PokeContainer({ pokemonImageRight, pokemonImageLeft }: Props) {
           alt=" "
           hidden={hideImg()}
           className={loadAnim}
+          onClick={() => reviewAnswer(pokemonRName)}
         />
       </StyledPokeContainer>
     </StyledWrapper>

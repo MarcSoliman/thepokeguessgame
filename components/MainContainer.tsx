@@ -38,9 +38,20 @@ export const StyledContainerImage = styled.div`
 type Props = {
   pokemonImageRight: string;
   pokemonImageLeft: string;
+  selectedPokemon: any;
+  pokemonRName: string;
+  pokemonLName: string;
+  winLose: any;
 };
 
-function MainContainer({ pokemonImageRight, pokemonImageLeft }: Props) {
+function MainContainer({
+  pokemonImageRight,
+  pokemonImageLeft,
+  selectedPokemon,
+  pokemonRName,
+  pokemonLName,
+  winLose,
+}: Props) {
   return (
     <StyledContainerWrapper>
       <StyledContainer>
@@ -48,6 +59,10 @@ function MainContainer({ pokemonImageRight, pokemonImageLeft }: Props) {
           <PokeContainer
             pokemonImageRight={pokemonImageRight}
             pokemonImageLeft={pokemonImageLeft}
+            selectedPokemon={selectedPokemon}
+            pokemonLName={pokemonLName}
+            pokemonRName={pokemonRName}
+            winLose={winLose}
           />
         </StyledContainerImage>
       </StyledContainer>

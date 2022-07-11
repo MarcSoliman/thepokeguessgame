@@ -18,6 +18,7 @@ const Home: NextPage = () => {
   const [pokemonRData, setPokemonRData]: any = useState("");
   const [pokemonLData, setPokemonLData]: any = useState("");
   const [pokemonQuestion, setPokemonQuestion]: any = useState("");
+  const [selectedPokemon, setSelectedPokemon]: any = useState("");
 
   const randomPokemon: (inUseID?: number) => number = (inUseID) => {
     const pokemonID = Math.floor(Math.random() * 800 + 1);
@@ -39,6 +40,7 @@ const Home: NextPage = () => {
     const chosenPokemon = [pokemonRData, pokemonLData][
       Math.floor(Math.random() * 2)
     ];
+    setSelectedPokemon(chosenPokemon);
     const typeOfQuestion = Math.random() * 1;
 
     if (typeOfQuestion > 0.7) {
@@ -83,6 +85,13 @@ const Home: NextPage = () => {
     chosenQuestion();
   }, [pokemonRData, pokemonLData]);
 
+  const winLoseCallback: any = (state: string) => {
+    if (state === "win") {
+      pokeDataFetch();
+    } else {
+      console.log("YOU LOSE");
+    }
+  };
   return (
     <StyledBackgroundContainer>
       <Head>
@@ -94,7 +103,11 @@ const Home: NextPage = () => {
       <PokeGuessApp
         pokemonRImage={pokemonRData.sprite}
         pokemonLImage={pokemonLData.sprite}
+        pokemonRName={pokemonRData.name}
+        pokemonLName={pokemonLData.name}
         GeneratedQuestion={pokemonQuestion}
+        selectedPokemon={selectedPokemon}
+        winLose={winLoseCallback}
       />
     </StyledBackgroundContainer>
   );
