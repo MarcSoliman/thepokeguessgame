@@ -122,6 +122,9 @@ function PokeContainer({
   randImgKey,
   didLose,
 }: Props) {
+  const [timer, setTimer] = useState(10);
+  const [restartTimer, setRestartTimer] = useState(false);
+
   const hideImg = () => {
     if (pokemonImageRight == undefined || pokemonImageLeft == undefined) {
       loadAnim = "";
@@ -145,8 +148,30 @@ function PokeContainer({
       winLose("lose");
     } else {
       winLose("win");
+      setRestartTimer(true);
     }
   }
+
+  const decrementTimer = () => {
+    return setTimer(timer - 1);
+  };
+
+  useEffect(() => {
+    const countdown = setInterval(decrementTimer, 1000);
+    if (restartTimer) {
+      clearInterval(countdown);
+      setTimer(10);
+      setRestartTimer(false);
+    }
+    if (timer <= 0 || didLose) {
+      clearInterval(countdown);
+      winLose("lose");
+    }
+
+    return () => {
+      clearInterval(countdown);
+    };
+  }, [timer]);
 
   return (
     <StyledWrapper>
@@ -161,7 +186,7 @@ function PokeContainer({
         />
       </StyledPokeContainer>
       <StyledMiddleWrapper>
-        <StyledTimer>{0}</StyledTimer>
+        <StyledTimer>{timer}</StyledTimer>
         <StyledPokeball src="Pokeball.svg" width={140} />
         <StyledScore>SCORE: {2}</StyledScore>
       </StyledMiddleWrapper>
