@@ -1,4 +1,7 @@
+import { clear } from "console";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { setTimeout } from "timers";
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -18,9 +21,11 @@ export const StyledPokeContainer = styled.div`
   background-color: #fff;
   border-radius: 28px;
   margin: 20px;
-
+  transition: all 0.5s ease;
+  border: 10px solid #ffd344;
   &.didLose {
-    background-color: #f88383;
+    background-color: #ff5362;
+    border: 10px solid #fff;
   }
 `;
 
@@ -75,13 +80,25 @@ export const StyledPokemonImage = styled.img`
       height: 120%;
     }
   }
-
-  &.didLose {
-    width: 0;
-    height: 0;
-  }
 `;
-
+export const StyledScore = styled.h1`
+  display: flex;
+  color: #fff;
+  font-weight: 200;
+  font-size: 32px;
+`;
+export const StyledTimer = styled.h1`
+  display: flex;
+  color: #fff;
+  font-weight: 200;
+  font-size: 32px;
+`;
+export const StyledMiddleWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`;
 type Props = {
   pokemonImageRight: string;
   pokemonImageLeft: string;
@@ -94,7 +111,6 @@ type Props = {
 };
 
 let loadAnim = "load-anim ";
-let randImgKey: number;
 
 function PokeContainer({
   pokemonImageRight,
@@ -112,7 +128,6 @@ function PokeContainer({
       return true;
     } else {
       loadAnim = "load-anim ";
-
       return false;
     }
   };
@@ -125,13 +140,14 @@ function PokeContainer({
     }
   };
 
-  const reviewAnswer = (pokemon: string) => {
+  function reviewAnswer(pokemon: string) {
     if (pokemon !== selectedPokemon.name) {
       winLose("lose");
     } else {
       winLose("win");
     }
-  };
+  }
+
   return (
     <StyledWrapper>
       <StyledPokeContainer className={loseState()}>
@@ -140,19 +156,29 @@ function PokeContainer({
           src={pokemonImageLeft}
           alt=" "
           hidden={hideImg()}
-          className={loadAnim + loseState()}
-          onClick={() => reviewAnswer(pokemonLName)}
+          className={loadAnim}
+          onClick={loseState() ? () => {} : () => reviewAnswer(pokemonLName)}
         />
       </StyledPokeContainer>
-      <StyledPokeball src="Pokeball.svg" width={140} />
+      <StyledMiddleWrapper>
+        <StyledTimer>{0}</StyledTimer>
+        <StyledPokeball src="Pokeball.svg" width={140} />
+        <StyledScore>SCORE: {2}</StyledScore>
+      </StyledMiddleWrapper>
       <StyledPokeContainer className={loseState()}>
         <StyledPokemonImage
           key={randImgKey}
           src={pokemonImageRight}
           alt=" "
           hidden={hideImg()}
-          className={loadAnim + loseState()}
-          onClick={() => reviewAnswer(pokemonRName)}
+          className={loadAnim}
+          onClick={
+            loseState()
+              ? () => {}
+              : () => {
+                  reviewAnswer(pokemonRName);
+                }
+          }
         />
       </StyledPokeContainer>
     </StyledWrapper>

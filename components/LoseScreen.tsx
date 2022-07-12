@@ -29,7 +29,7 @@ export const StyledLoseButton = styled.button`
   font-weight: 700;
   transition: all 0.2s ease;
 
-  stroke: none;
+  outline: none;
   :hover {
     cursor: pointer;
     color: #ec4ed7;
@@ -47,7 +47,7 @@ export const StyledLoseButton = styled.button`
 export function LoseScreen() {
   return (
     <StyledLoseWrapper>
-      <StyledLoseText>Sorry that's wrong!</StyledLoseText>
+      <StyledLoseText>Oops looks like you lost!</StyledLoseText>
       <StyledLoseButton onClick={() => Router.reload()}>
         Try Again
       </StyledLoseButton>

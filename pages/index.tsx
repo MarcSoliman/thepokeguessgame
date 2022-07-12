@@ -14,12 +14,7 @@ export const StyledBackgroundContainer = styled.div`
   height: 100vh;
 `;
 
-export const StyledScore = styled.h1`
-  position: fixed;
-  left: 20px;
-  top: 400px;
-  color: #fff;
-`;
+
 
 const Home: NextPage = () => {
   const [pokemonRData, setPokemonRData]: any = useState("");
@@ -148,7 +143,7 @@ const Home: NextPage = () => {
         didLose={didLose}
         randImgKey={randImgKey}
       />
-      <StyledScore>SCORE: {score}</StyledScore>
+      
     </StyledBackgroundContainer>
   );
 };

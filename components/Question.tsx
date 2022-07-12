@@ -13,13 +13,15 @@ export const StyledQuestionWrapper = styled.div`
 export const StyledQuestionHeader = styled.h3`
   font-size: 48px;
   color: #fff;
+  text-shadow: 1px 1px 15px #d400ff;
   margin: 0;
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 `;
 export const StyledQuestion = styled.h4`
   font-size: 48px;
   color: #fff;
   margin: 0;
+  text-shadow: 1px 1px 15px #d400ff;
 `;
 
 type Props = {
