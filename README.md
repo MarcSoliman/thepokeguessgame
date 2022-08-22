@@ -1,34 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a Pokemon Trivia Game created utilizing the React framework NextJS, as well as PokeAPI for the Pokemon Data.
 
-## Getting Started
+## What I Learned
 
-First, run the development server:
+Creating this web app from beginning to end taught me and reinforced many important web development concepts. I created the design in Figma first and quickly learned that creating a design key helped a ton with coding the visuals. 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+I then focused on the logic of the web app, and by using the PokeAPI as my api of choice and axios, I was able to read and use all the data I needed about all of the avilable Pokemon. Utilizing NextJs/s built-in backend solution, I also got in the good habit to use .env.local files in order to store my api key (in this case this is the public PokeAPI key, but this was done to reinforce best-practicies to simulate an industry situation)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Video Demonstration
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+https://user-images.githubusercontent.com/71621832/185820463-b65c613b-5693-497c-a304-dd3a624bea3d.mov
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## UI/UX Design
+![ThePokeGuessGame](https://user-images.githubusercontent.com/71621832/185820675-aac33e21-998b-497d-82ba-9db8a16987fb.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
