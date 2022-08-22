@@ -44,6 +44,7 @@ type Props = {
   winLose: any;
   randImgKey: any;
   didLose: any;
+  score: number;
 };
 
 function MainContainer({
@@ -55,6 +56,7 @@ function MainContainer({
   winLose,
   randImgKey,
   didLose,
+  score,
 }: Props) {
   return (
     <StyledContainerWrapper>
@@ -69,6 +71,7 @@ function MainContainer({
             winLose={winLose}
             randImgKey={randImgKey}
             didLose={didLose}
+            score={score}
           />
         </StyledContainerImage>
       </StyledContainer>

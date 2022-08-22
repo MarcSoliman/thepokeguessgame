@@ -108,6 +108,7 @@ type Props = {
   winLose: any;
   randImgKey: any;
   didLose: any;
+  score: number;
 };
 
 let loadAnim = "load-anim ";
@@ -121,6 +122,7 @@ function PokeContainer({
   winLose,
   randImgKey,
   didLose,
+  score,
 }: Props) {
   const [timer, setTimer] = useState(10);
   const [restartTimer, setRestartTimer] = useState(false);
@@ -188,7 +190,7 @@ function PokeContainer({
       <StyledMiddleWrapper>
         <StyledTimer>{timer}</StyledTimer>
         <StyledPokeball src="Pokeball.svg" width={140} />
-        <StyledScore>SCORE: {2}</StyledScore>
+        <StyledScore>SCORE: {score}</StyledScore>
       </StyledMiddleWrapper>
       <StyledPokeContainer className={loseState()}>
         <StyledPokemonImage

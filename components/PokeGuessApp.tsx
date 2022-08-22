@@ -12,6 +12,7 @@ type Props = {
   winLose: any;
   randImgKey: any;
   didLose: any;
+  score: number;
 };
 
 function PokeGuessApp({
@@ -24,6 +25,7 @@ function PokeGuessApp({
   winLose,
   randImgKey,
   didLose,
+  score,
 }: Props) {
   return (
     <div>
@@ -36,6 +38,7 @@ function PokeGuessApp({
         winLose={winLose}
         randImgKey={randImgKey}
         didLose={didLose}
+        score={score}
       />
       <div>
         {didLose ? (

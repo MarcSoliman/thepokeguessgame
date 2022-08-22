@@ -14,8 +14,6 @@ export const StyledBackgroundContainer = styled.div`
   height: 100vh;
 `;
 
-
-
 const Home: NextPage = () => {
   const [pokemonRData, setPokemonRData]: any = useState("");
   const [pokemonLData, setPokemonLData]: any = useState("");
@@ -142,8 +140,8 @@ const Home: NextPage = () => {
         winLose={winLoseCallback}
         didLose={didLose}
         randImgKey={randImgKey}
+        score={score}
       />
-      
     </StyledBackgroundContainer>
   );
 };
