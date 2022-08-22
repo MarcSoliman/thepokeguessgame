@@ -8,7 +8,11 @@ I then focused on the logic of the web app, and by using the PokeAPI as my api o
 
 ## Video Demonstration
 
-https://user-images.githubusercontent.com/71621832/185820463-b65c613b-5693-497c-a304-dd3a624bea3d.mov
+
+https://user-images.githubusercontent.com/71621832/185821797-11a6c563-1bc3-4e91-907e-00d1616958e4.mov
+
+
+
 
 ## UI/UX Design
 ![ThePokeGuessGame](https://user-images.githubusercontent.com/71621832/185820675-aac33e21-998b-497d-82ba-9db8a16987fb.png)
