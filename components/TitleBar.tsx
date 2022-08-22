@@ -26,6 +26,7 @@ export const StyledTitleBar = styled.div`
 export const StyledTitle = styled.h1`
   font-size: 64px;
   color: #fff;
+  font-family: "Mochiy Pop One", sans-serif;
 `;
 
 function TitleBar() {
